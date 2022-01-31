@@ -2,13 +2,14 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 func main() {
 	log.Println("broad cast start")
-	bot, err := linebot.New("LineBotSecret", "LineChannelAccessToken")
+	bot, err := linebot.New(os.Getenv("SECRET"), os.Getenv("TOKEN"))
 	if err != nil {
 		log.Fatalln(err)
 	}
