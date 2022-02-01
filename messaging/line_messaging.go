@@ -35,7 +35,7 @@ func NewTarget(item gofeed.Item) *TargetLatestMovie {
 }
 
 // GetTargetLatestMovieByFeed is get TargetLatestMovie by feed url.
-func GetTargetLatestMovieByFeed(feedURL string) TargetLatestMovie {
+func GetTargetLatestMovieByFeed(feedURL string) *TargetLatestMovie {
 	feed, err := gofeed.NewParser().ParseURL(feedURL)
 	if err != nil {
 		log.Fatal("failed to parsefeed URL.")
@@ -45,22 +45,7 @@ func GetTargetLatestMovieByFeed(feedURL string) TargetLatestMovie {
 		log.Fatal("target channel does't have Movie.")
 	}
 
-	return *NewTarget(*feed.Items[0])
-}
-
-// Title is to return title at TargetLatestMovie.
-func (t *TargetLatestMovie) Title() string {
-	return t.title
-}
-
-// URL is to return Url at TargetLatestMovie.
-func (t *TargetLatestMovie) URL() string {
-	return t.url
-}
-
-// PublishedDate is to return Published Date at TargetLatestMovie.
-func (t *TargetLatestMovie) PublishedDate() time.Time {
-	return t.publishedDate
+	return NewTarget(*feed.Items[0])
 }
 
 // BroadcastInfo is BroadcastInfo struct.
@@ -94,14 +79,13 @@ func (b *BroadcastInfo) BroadCast() {
 
 // Execute is to execute Line Messaging API to push message.
 func Execute() {
-
 	godotenv.Load(".env")
 	feed := GetTargetLatestMovieByFeed(TargetURL)
-	var broadCastInfo BroadcastInfo
-	if feed.PublishedDate().Add(time.Hour*9).Day() == time.Now().UTC().Add(time.Hour*9).Day() {
-		broadCastInfo = *NewBroadCastInfo("ホモサピの最新動画が来ているよ！", feed.URL())
+	var broadCastInfo *BroadcastInfo
+	if feed.publishedDate.Add(time.Hour*9).Day() == time.Now().UTC().Add(time.Hour*9).Day() {
+		broadCastInfo = NewBroadCastInfo("ホモサピの最新動画が来ているよ！", feed.url)
 	} else {
-		broadCastInfo = *NewBroadCastInfo("今日はホモサピの動画あがっていないよ・・・代わりにパセリ聞いてね", SeroriURL)
+		broadCastInfo = NewBroadCastInfo("今日はホモサピの動画あがっていないよ・・・代わりにパセリ聞いてね", SeroriURL)
 	}
 	broadCastInfo.BroadCast()
 }
