@@ -2,10 +2,9 @@ name: Go
 
 on:
   schedule:
-    - cron: '45 14 * * *'  
-  push:
-    branches: [ master ]
-
+    - cron: '40 14 * * *'  
+  # push:
+  #   branches: [ master ]
 jobs:
   build:
     name: run
