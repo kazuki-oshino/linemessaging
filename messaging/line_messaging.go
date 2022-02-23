@@ -2,6 +2,7 @@ package messaging
 
 import (
 	"log"
+	"math/rand"
 	"os"
 	"time"
 
@@ -20,6 +21,23 @@ const (
 	// HigeSoriFeedURL is ひげそりのFEED URL
 	HigeSoriFeedURL = "https://www.youtube.com/feeds/videos.xml?channel_id=UCVI4ZUakZBLvdgb0ltKPS8Q"
 )
+
+// GodURLList is 神動画リスト
+func getGodURLList() []string {
+	return []string{
+		"https://www.youtube.com/watch?v=vPwaXytZcgI",
+		"https://www.youtube.com/watch?v=kOHB85vDuow",
+		"https://www.youtube.com/watch?v=rRzxEiBLQCA",
+		"https://www.youtube.com/watch?v=XA2YEHn-A8Q",
+		"https://www.youtube.com/watch?v=c7rCyll5AeY",
+		"https://www.youtube.com/watch?v=3ymwOvzhwHs",
+		"https://www.youtube.com/watch?v=fmOEKOjyDxU",
+		"https://www.youtube.com/watch?v=sLmLwgxnPUE",
+		"https://www.youtube.com/watch?v=CM4CkVFmTds",
+		"https://www.youtube.com/watch?v=i0p1bmr0EmE",
+		SeroriURL,
+	}
+}
 
 // TargetLatestMovie is movie info struct.
 type TargetLatestMovie struct {
@@ -102,12 +120,15 @@ func Execute() {
 		return
 	}
 
-	isHigeBroadCast := checkTargetAndBroadCast(HigeSoriFeedURL, "ひげの最新動画来たでー", 0)
+	isHigeBroadCast := checkTargetAndBroadCast(HigeSoriFeedURL, "ひげの最新動画来たでー", 9)
 	if isHigeBroadCast {
 		return
 	}
 
-	broadCastInfo := NewBroadCastInfo("今日はホモサピもひげもないよ・・・代わりにパセリ聞いてね", SeroriURL)
+	rand.Seed(time.Now().UnixNano())
+	godURLList := getGodURLList()
+	todaysGodURL := godURLList[rand.Intn(len(godURLList))]
+	broadCastInfo := NewBroadCastInfo("今日はホモサピもひげもないよ・・・代わりに神動画を見てね", todaysGodURL)
 	broadCastInfo.BroadCast()
-	log.Println("今日はホモサピもひげもないよ・・・代わりにパセリ聞いてね")
+	log.Println("今日はホモサピもひげもないよ・・・代わりに神動画を見てね")
 }
