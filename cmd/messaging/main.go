@@ -1,14 +1,11 @@
-package main
+package messaging
 
 import (
-	"linemessaging/messaging"
 	"log"
 )
 
 func main() {
 	log.Println("broad cast start")
-
-	messaging.Execute()
-
+	Execute()
 	log.Println("broad cast end")
 }
