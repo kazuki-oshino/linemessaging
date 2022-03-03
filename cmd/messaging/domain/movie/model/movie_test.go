@@ -11,7 +11,7 @@ func TestNewMovie(t *testing.T) {
 	now := time.Now()
 	actual, _ := NewMovie("title", "url", &now)
 	assert.Equal(t, "title", actual.Title())
-	assert.Equal(t, "urla", actual.URL())
+	assert.Equal(t, "url", actual.URL())
 	assert.Equal(t, true, actual.IsPublishedToday(0))
 	assert.Equal(t, false, actual.IsPublishedToday(30))
 }
