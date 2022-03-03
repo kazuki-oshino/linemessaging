@@ -17,17 +17,17 @@ jobs:
         with:
           go-version: 1.17
 
-  - name: Test go app
-    test:
-      needs: setup
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: test
-          run: go test ./... -v
+      - name: Test go app
+        test:
+          needs: setup
+          runs-on: ubuntu-latest
+          steps:
+            - uses: actions/checkout@v2
+            - name: test
+              run: go test ./... -v
 
-  - name: Run go app
-    run: go run ./cmd/messaging/main.go
-    env:
-      SECRET: $ {{ secrets.SECRET }}
-      TOKEN: ${{ secrets.TOKEN }}
+      - name: Run go app
+        run: go run ./cmd/messaging/main.go
+        env:
+          SECRET: $ {{ secrets.SECRET }}
+          TOKEN: ${{ secrets.TOKEN }}
