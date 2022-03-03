@@ -1,7 +1,7 @@
 package model
 
 import (
-	"log"
+	"errors"
 	"time"
 )
 
@@ -13,15 +13,15 @@ type Movie struct {
 }
 
 // NewTarget is make TargetLatestMovie struct.
-func NewMovie(title, url string, publishedDate *time.Time) (movie *Movie) {
+func NewMovie(title, url string, publishedDate *time.Time) (movie *Movie, err error) {
 	if url == "" {
-		log.Fatalln("urlは必須です")
+		return nil, errors.New("URLは必須")
 	}
 	return &Movie{
 		title:         title,
 		url:           url,
 		publishedDate: publishedDate,
-	}
+	}, nil
 }
 
 func (m *Movie) Title() string {

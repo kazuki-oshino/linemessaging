@@ -36,8 +36,11 @@ func (repo *feedMovieGetterRepository) GetLatestMovie(findBy string) *model.Movi
 	if len(feed.Items) == 0 {
 		log.Fatal("target channel does't have Movie.")
 	}
-
-	return model.NewMovie(feed.Items[0].Title, feed.Items[0].Link, feed.Items[0].PublishedParsed)
+	movie, err := model.NewMovie(feed.Items[0].Title, feed.Items[0].Link, feed.Items[0].PublishedParsed)
+	if err != nil {
+		log.Fatal("url not found.")
+	}
+	return movie
 }
 
 func getURLByFeedKey(key string) string {

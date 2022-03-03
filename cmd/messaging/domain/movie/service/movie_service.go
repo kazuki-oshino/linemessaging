@@ -53,6 +53,6 @@ func (s *MovieService) GetBroadcastMovie() *model.Movie {
 	rand.Seed(time.Now().UnixNano())
 	godURLList := getGodURLList()
 	todaysGodURL := godURLList[rand.Intn(len(godURLList))]
-
-	return model.NewMovie("神曲", todaysGodURL, nil)
+	todaysGodMovie, _ := model.NewMovie("神曲", todaysGodURL, nil)
+	return todaysGodMovie
 }
