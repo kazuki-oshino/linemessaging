@@ -14,6 +14,8 @@ const (
 
 	// HigeSoriFeedURL is ひげそりのFEED URL
 	HigeSoriFeedURL = "https://www.youtube.com/feeds/videos.xml?channel_id=UCVI4ZUakZBLvdgb0ltKPS8Q"
+
+	JeradonFeedURL = "https://www.youtube.com/feeds/videos.xml?channel_id=UCRaaCxSF8nEpfG3ZHesXKxw"
 )
 
 type feedMovieGetterRepository struct{}
@@ -45,6 +47,6 @@ func (repo *feedMovieGetterRepository) GetLatestMovie(findBy string) *model.Movi
 }
 
 func getURLByFeedKey(key string) string {
-	feedMap := map[string]string{"homosapi": HomosapiFeedURL, "hige": HigeSoriFeedURL}
+	feedMap := map[string]string{"homosapi": HomosapiFeedURL, "hige": HigeSoriFeedURL, "j": JeradonFeedURL}
 	return feedMap[key]
 }

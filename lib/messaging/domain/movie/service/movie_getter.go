@@ -44,11 +44,10 @@ func (s *MovieService) GetBroadcastMovie() *model.Movie {
 	if homosapiMovie.IsPublishedToday(9) {
 		return homosapiMovie
 	}
-	// todo(kazuki): 投稿頻度が半端ないため一旦やめておく
-	// higeMovie := s.movieGetterRepository.GetLatestMovie("hige")
-	// if higeMovie.IsPublishedToday(9) {
-	// 	return higeMovie
-	// }
+	jeradonMovie := s.movieGetterRepository.GetLatestMovie("j")
+	if jeradonMovie.IsPublishedToday(9) {
+		return homosapiMovie
+	}
 	rand.Seed(time.Now().UnixNano())
 	godURLList := getGodURLList()
 	todaysGodURL := godURLList[rand.Intn(len(godURLList))]
