@@ -32,6 +32,10 @@ func (m *Movie) URL() string {
 	return m.url
 }
 
+func (m *Movie) PublishedDate() *time.Time {
+	return m.publishedDate
+}
+
 func (m *Movie) IsPublishedToday(timeDiff int) bool {
 	if m.publishedDate.UTC().Add(time.Hour*time.Duration(timeDiff)).Day() == time.Now().UTC().Add(time.Hour*9).Day() {
 		return true

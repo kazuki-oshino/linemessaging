@@ -46,7 +46,7 @@ func (s *MovieService) GetBroadcastMovie() *model.Movie {
 	}
 	jeradonMovie := s.movieGetterRepository.GetLatestMovie("j")
 	if jeradonMovie.IsPublishedToday(9) {
-		return homosapiMovie
+		return jeradonMovie
 	}
 	rand.Seed(time.Now().UnixNano())
 	godURLList := getGodURLList()
