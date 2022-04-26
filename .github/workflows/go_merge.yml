@@ -1,19 +1,19 @@
-# name: Go
+name: Go
 
-# on:
-#   push:
-#     branches: [master]
-# jobs:
-#   build:
-#     name: run
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    name: run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-#       - name: Set up Go
-#         uses: actions/setup-go@v2
-#         with:
-#           go-version: 1.17
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
 
-#       - name: Test go app
-#         run: go test ./... -v
+      - name: Test go app
+        run: go test ./... -v
