@@ -1,7 +1,7 @@
 package main
 
 import (
-	"linemessaging/cmd/messaging/app"
+	"linemessaging/lib/messaging/usecase"
 	"log"
 
 	"github.com/joho/godotenv"
@@ -9,7 +9,7 @@ import (
 
 func main() {
 	log.Println("broad cast start")
-	godotenv.Load("../../.env")
-	app.PublishMessage()
+	godotenv.Load(".env")
+	usecase.PublishMessage()
 	log.Println("broad cast end")
 }

@@ -1,7 +1,7 @@
-package repository
+package service
 
 import (
-	"linemessaging/cmd/messaging/domain/movie/model"
+	"linemessaging/lib/messaging/domain/movie/model"
 )
 
 type MessengerRepository interface {

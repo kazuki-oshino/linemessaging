@@ -1,17 +1,16 @@
 package service
 
 import (
-	"linemessaging/cmd/messaging/domain/movie/model"
-	"linemessaging/cmd/messaging/repository"
+	"linemessaging/lib/messaging/domain/movie/model"
 	"math/rand"
 	"time"
 )
 
 type MovieService struct {
-	movieGetterRepository repository.MovieGetterRepository
+	movieGetterRepository MovieGetterRepository
 }
 
-func NewMovieService(movieGetterRepository repository.MovieGetterRepository) *MovieService {
+func NewMovieService(movieGetterRepository MovieGetterRepository) *MovieService {
 	return &MovieService{
 		movieGetterRepository: movieGetterRepository,
 	}

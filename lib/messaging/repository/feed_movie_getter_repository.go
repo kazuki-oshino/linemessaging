@@ -1,7 +1,8 @@
 package repository
 
 import (
-	"linemessaging/cmd/messaging/domain/movie/model"
+	"linemessaging/lib/messaging/domain/movie/model"
+	"linemessaging/lib/messaging/domain/movie/service"
 	"log"
 
 	"github.com/mmcdole/gofeed"
@@ -17,7 +18,7 @@ const (
 
 type feedMovieGetterRepository struct{}
 
-func NewFeedMovieGetterRepository() MovieGetterRepository {
+func NewFeedMovieGetterRepository() service.MovieGetterRepository {
 	return &feedMovieGetterRepository{}
 }
 

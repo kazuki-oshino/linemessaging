@@ -1,8 +1,8 @@
-package app
+package usecase
 
 import (
-	"linemessaging/cmd/messaging/domain/movie/service"
-	"linemessaging/cmd/messaging/repository"
+	"linemessaging/lib/messaging/domain/movie/service"
+	"linemessaging/lib/messaging/repository"
 )
 
 func PublishMessage() {
