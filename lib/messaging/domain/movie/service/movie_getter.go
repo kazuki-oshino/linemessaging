@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"linemessaging/lib/messaging/domain/movie/model"
 	"math/rand"
 	"time"
@@ -38,16 +39,42 @@ func getGodURLList() []string {
 	}
 }
 
+type likeMovie struct {
+	key      string
+	timeDiff int
+}
+
+func getLikeMovies() []likeMovie {
+	return []likeMovie{
+		{
+			key:      "homosapi",
+			timeDiff: 9,
+		},
+		{
+			key:      "j",
+			timeDiff: 9,
+		},
+	}
+}
+
+func (s *MovieService) getMoviePublishedToday(key string, timeDiff int) (*model.Movie, error) {
+	m := s.movieGetterRepository.GetLatestMovie(key)
+	if !m.IsPublishedToday(timeDiff) {
+		return nil, fmt.Errorf("key: %s movie is not published Today.", key)
+	}
+	return m, nil
+}
+
 func (s *MovieService) GetBroadcastMovie() *model.Movie {
 
-	homosapiMovie := s.movieGetterRepository.GetLatestMovie("homosapi")
-	if homosapiMovie.IsPublishedToday(9) {
-		return homosapiMovie
+	targets := getLikeMovies()
+	for _, target := range targets {
+		movie, err := s.getMoviePublishedToday(target.key, target.timeDiff)
+		if err == nil {
+			return movie
+		}
 	}
-	jeradonMovie := s.movieGetterRepository.GetLatestMovie("j")
-	if jeradonMovie.IsPublishedToday(9) {
-		return jeradonMovie
-	}
+
 	rand.Seed(time.Now().UnixNano())
 	godURLList := getGodURLList()
 	todaysGodURL := godURLList[rand.Intn(len(godURLList))]
