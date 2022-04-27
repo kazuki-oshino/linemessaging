@@ -67,8 +67,7 @@ func (s *MovieService) getMoviePublishedToday(key string, timeDiff int) (*model.
 
 func (s *MovieService) GetBroadcastMovie() *model.Movie {
 
-	targets := getLikeMovies()
-	for _, target := range targets {
+	for _, target := range getLikeMovies() {
 		movie, err := s.getMoviePublishedToday(target.key, target.timeDiff)
 		if err == nil {
 			return movie
