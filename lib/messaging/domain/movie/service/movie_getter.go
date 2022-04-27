@@ -20,6 +20,9 @@ func NewMovieService(movieGetterRepository MovieGetterRepository) *MovieService 
 const (
 	// SeroriURL is セロリのURL
 	SeroriURL = "https://www.youtube.com/watch?v=M4sWFgBYNbI"
+	J         = "j"
+	Homosapi  = "homosapi"
+	Hige      = "hige"
 )
 
 // GodURLList is 神動画リスト

@@ -47,6 +47,6 @@ func (repo *feedMovieGetterRepository) GetLatestMovie(findBy string) *model.Movi
 }
 
 func getURLByFeedKey(key string) string {
-	feedMap := map[string]string{"homosapi": HomosapiFeedURL, "hige": HigeSoriFeedURL, "j": JeradonFeedURL}
+	feedMap := map[string]string{service.Homosapi: HomosapiFeedURL, service.Hige: HigeSoriFeedURL, service.J: JeradonFeedURL}
 	return feedMap[key]
 }
