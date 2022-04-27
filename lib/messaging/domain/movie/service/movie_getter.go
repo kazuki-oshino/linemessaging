@@ -44,11 +44,11 @@ type LikeMovie struct {
 func getLikeMovies() []LikeMovie {
 	return []LikeMovie{
 		{
-			key:      "homosapi",
+			key:      Homosapi,
 			timeDiff: 9,
 		},
 		{
-			key:      "j",
+			key:      J,
 			timeDiff: 9,
 		},
 	}
