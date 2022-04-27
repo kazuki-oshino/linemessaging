@@ -1,4 +1,4 @@
-name: Go
+name: Task
 
 on:
   schedule:

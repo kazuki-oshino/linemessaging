@@ -1,4 +1,4 @@
-name: Go
+name: Merge_Check
 
 on:
   push:
