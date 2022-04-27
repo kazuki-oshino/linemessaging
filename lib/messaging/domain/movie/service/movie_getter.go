@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"fmt"
 	"linemessaging/lib/messaging/domain/movie/model"
 	"log"
@@ -35,13 +36,13 @@ func getGodURLList() []string {
 	}
 }
 
-type likeMovie struct {
+type LikeMovie struct {
 	key      string
 	timeDiff int
 }
 
-func getLikeMovies() []likeMovie {
-	return []likeMovie{
+func getLikeMovies() []LikeMovie {
+	return []LikeMovie{
 		{
 			key:      "homosapi",
 			timeDiff: 9,
@@ -61,20 +62,33 @@ func (s *MovieService) getMoviePublishedToday(key string, timeDiff int) (*model.
 	return m, nil
 }
 
-func (s *MovieService) GetBroadcastMovie() *model.Movie {
-
-	for _, target := range getLikeMovies() {
+func (s *MovieService) GetLikeMovie(movies []LikeMovie) (*model.Movie, error) {
+	for _, target := range movies {
 		movie, err := s.getMoviePublishedToday(target.key, target.timeDiff)
 		if err == nil {
-			return movie
+			return movie, nil
 		} else {
 			log.Println(err.Error())
 		}
 	}
+	return nil, errors.New("Like movie is not exist today.")
+}
 
+func (s *MovieService) GetGodMovie(godURLList []string) *model.Movie {
 	rand.Seed(time.Now().UnixNano())
-	godURLList := getGodURLList()
 	todaysGodURL := godURLList[rand.Intn(len(godURLList))]
 	todaysGodMovie, _ := model.NewMovie("神曲", todaysGodURL, nil)
 	return todaysGodMovie
+}
+
+func (s *MovieService) GetBroadcastMovie() *model.Movie {
+
+	movie, err := s.GetLikeMovie(getLikeMovies())
+	if err != nil {
+		log.Println(err.Error())
+	} else {
+		return movie
+	}
+
+	return s.GetGodMovie(getGodURLList())
 }
