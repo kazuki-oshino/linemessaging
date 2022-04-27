@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"linemessaging/lib/messaging/domain/movie/model"
+	"log"
 	"math/rand"
 	"time"
 )
@@ -18,27 +19,19 @@ func NewMovieService(movieGetterRepository MovieGetterRepository) *MovieService 
 }
 
 const (
-	// SeroriURL is セロリのURL
-	SeroriURL = "https://www.youtube.com/watch?v=M4sWFgBYNbI"
-	J         = "j"
-	Homosapi  = "homosapi"
-	Hige      = "hige"
+	J        = "j"
+	Homosapi = "homosapi"
+	Hige     = "hige"
 )
 
 // GodURLList is 神動画リスト
 func getGodURLList() []string {
 	return []string{
-		"https://www.youtube.com/watch?v=vPwaXytZcgI",
-		"https://www.youtube.com/watch?v=kOHB85vDuow",
-		"https://www.youtube.com/watch?v=rRzxEiBLQCA",
-		"https://www.youtube.com/watch?v=XA2YEHn-A8Q",
-		"https://www.youtube.com/watch?v=c7rCyll5AeY",
-		"https://www.youtube.com/watch?v=3ymwOvzhwHs",
-		"https://www.youtube.com/watch?v=fmOEKOjyDxU",
-		"https://www.youtube.com/watch?v=sLmLwgxnPUE",
-		"https://www.youtube.com/watch?v=CM4CkVFmTds",
-		"https://www.youtube.com/watch?v=i0p1bmr0EmE",
-		SeroriURL,
+		"https://www.youtube.com/watch?v=N-bdKXQcGiM",
+		"https://www.youtube.com/watch?v=XicdpSmxuT0",
+		"https://www.youtube.com/watch?v=B--iJ2pNvLU",
+		"https://www.youtube.com/watch?v=E6EItQRTmAI",
+		"https://www.youtube.com/watch?v=CbH2F0kXgTY",
 	}
 }
 
@@ -74,6 +67,8 @@ func (s *MovieService) GetBroadcastMovie() *model.Movie {
 		movie, err := s.getMoviePublishedToday(target.key, target.timeDiff)
 		if err == nil {
 			return movie
+		} else {
+			log.Println(err.Error())
 		}
 	}
 
