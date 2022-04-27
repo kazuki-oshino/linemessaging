@@ -63,7 +63,7 @@ func getLikeMovies() []likeMovie {
 func (s *MovieService) getMoviePublishedToday(key string, timeDiff int) (*model.Movie, error) {
 	m := s.movieGetterRepository.GetLatestMovie(key)
 	if !m.IsPublishedToday(timeDiff) {
-		return nil, fmt.Errorf("key: %s movie is not published Today.", key)
+		return nil, fmt.Errorf("key: %s movie is not published Today.Latest publishedDate: %v", key, m.PublishedDate())
 	}
 	return m, nil
 }
