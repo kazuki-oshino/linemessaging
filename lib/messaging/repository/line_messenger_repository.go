@@ -22,7 +22,7 @@ func (repo *lineMessengerRepository) Broadcast(movie *model.Movie) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	message1 := linebot.NewTextMessage(fmt.Sprintf("今日の動画は「%s」やで!", movie.Title()))
+	message1 := linebot.NewTextMessage(fmt.Sprintf("お待たせやで。今日の動画は「%s」やで!", movie.Title()))
 	message2 := linebot.NewTextMessage(movie.URL())
 	if _, err := bot.BroadcastMessage(message1, message2).Do(); err != nil {
 		log.Fatalln(err)

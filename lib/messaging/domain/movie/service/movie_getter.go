@@ -28,11 +28,10 @@ const (
 // GodURLList is 神動画リスト
 func getGodURLList() []string {
 	return []string{
-		"https://www.youtube.com/watch?v=N-bdKXQcGiM",
-		"https://www.youtube.com/watch?v=XicdpSmxuT0",
-		"https://www.youtube.com/watch?v=B--iJ2pNvLU",
-		"https://www.youtube.com/watch?v=E6EItQRTmAI",
-		"https://www.youtube.com/watch?v=CbH2F0kXgTY",
+		"https://www.youtube.com/watch?v=iSsct7423J4",
+		"https://www.youtube.com/watch?v=JQVKkjA0law",
+		"https://www.youtube.com/watch?v=WkRJf_TIpgc",
+		"https://www.youtube.com/watch?v=viZv-Ua9hIQ",
 	}
 }
 
