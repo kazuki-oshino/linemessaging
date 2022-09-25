@@ -1,9 +1,9 @@
-package repository
+package repository_impl
 
 import (
 	"fmt"
-	"linemessaging/lib/messaging/domain/movie/model"
-	"linemessaging/lib/messaging/domain/movie/service"
+	"linemessaging/lib/messaging/domain/movie/model/vo"
+	"linemessaging/lib/messaging/domain/movie/service/repository"
 	"log"
 	"os"
 
@@ -12,12 +12,12 @@ import (
 
 type lineMessengerRepository struct{}
 
-func NewLineMessengerRepository() service.MessengerRepository {
+func NewLineMessengerRepository() repository.MessengerRepository {
 
 	return &lineMessengerRepository{}
 }
 
-func (repo *lineMessengerRepository) Broadcast(movie *model.Movie) {
+func (repo *lineMessengerRepository) Broadcast(movie *vo.Movie) {
 	bot, err := linebot.New(os.Getenv("SECRET"), os.Getenv("TOKEN"))
 	if err != nil {
 		log.Fatalln(err)

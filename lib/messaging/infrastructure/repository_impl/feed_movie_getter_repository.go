@@ -1,8 +1,9 @@
-package repository
+package repository_impl
 
 import (
-	"linemessaging/lib/messaging/domain/movie/model"
+	"linemessaging/lib/messaging/domain/movie/model/vo"
 	"linemessaging/lib/messaging/domain/movie/service"
+	"linemessaging/lib/messaging/domain/movie/service/repository"
 	"log"
 
 	"github.com/mmcdole/gofeed"
@@ -20,11 +21,11 @@ const (
 
 type feedMovieGetterRepository struct{}
 
-func NewFeedMovieGetterRepository() service.MovieGetterRepository {
+func NewFeedMovieGetterRepository() repository.MovieGetterRepository {
 	return &feedMovieGetterRepository{}
 }
 
-func (repo *feedMovieGetterRepository) GetLatestMovie(findBy string) *model.Movie {
+func (repo *feedMovieGetterRepository) GetLatestMovie(findBy string) *vo.Movie {
 
 	url := getURLByFeedKey(findBy)
 	if url == "" {
@@ -39,7 +40,7 @@ func (repo *feedMovieGetterRepository) GetLatestMovie(findBy string) *model.Movi
 	if len(feed.Items) == 0 {
 		log.Fatal("target channel does't have Movie.")
 	}
-	movie, err := model.NewMovie(feed.Items[0].Title, feed.Items[0].Link, feed.Items[0].PublishedParsed)
+	movie, err := vo.NewMovie(feed.Items[0].Title, feed.Items[0].Link, feed.Items[0].PublishedParsed)
 	if err != nil {
 		log.Fatal("url not found.")
 	}
